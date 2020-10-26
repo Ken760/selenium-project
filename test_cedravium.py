@@ -1,3 +1,7 @@
+## Данные для авторизации
+mail = 'test@mail.ru'
+password = 'qwerty11'
+##
 from allure_commons.types import Severity
 from selenium import webdriver
 import unittest
@@ -8,46 +12,24 @@ import allure
 
 
 class CedraviumTest(unittest.TestCase):
+
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get('http://cedravium.ru/#/')
 
-    # new user registration
-
-    # def test_registration(self):
-    #     driver = self.driver
-    #     sign_up = driver.find_element(By.XPATH, "//button[@class='simple-button']")
-    #     sign_up.click()
-    #     time.sleep(0.5)
-    #
-    #     login_form = driver.find_element(By.XPATH, "//form[@class='registration']//input[@type = 'text']")
-    #     login_form.click()
-    #     login_form.send_keys('test' + Keys.TAB + 'test@mail.ru' + Keys.TAB + 'qwerty11' + Keys.TAB + 'qwerty11')
-    #     time.sleep(1)
-    #     button_register = driver.find_element(By.XPATH, "//form[@class='registration']//button[@type = 'submit']")
-    #     button_register.click()
-    #     time.sleep(5)
-
-    # user authentication
-
-    @allure.title('Авторизация пользователя')
+    @allure.title('Тестирование авторизации, созадния, открытия тестов')
     @allure.severity(Severity.BLOCKER)
-    def test_sign_in(self):
+    def test_cedravium(self):
         driver = self.driver
         with allure.step('Нажимаем кнопку Sign up'):
             sign_up = driver.find_element(By.XPATH, "//button[@class='simple-button']")
-            sign_up.click()
             time.sleep(0.5)
+            sign_up.click()
 
         sign_in = driver.find_element(By.XPATH, "//form[@class='authentication']//input[@type = 'text']")
         sign_in.click()
-        with allure.step('Ожидаем ввода данных пользователя'):
-            sign_in.send_keys('test@mail.ru' + Keys.TAB + 'qwerty11')
-            time.sleep(0.5)
-        with allure.step('Нажимает кнопку авторизации'):
-            button_authentication = driver.find_element(By.XPATH,
-                                                        "//form[@class='authentication']//button[@type = 'submit']")
-            button_authentication.click()
+        with allure.step('Ожидаем ввода данных пользователя и нажимаем кнопку Enter для авторизации'):
+            sign_in.send_keys(mail + Keys.TAB + password + Keys.ENTER)
             time.sleep(1)
 
         with allure.step('Возвращаемся на главную страницу'):
@@ -57,6 +39,30 @@ class CedraviumTest(unittest.TestCase):
 
         with allure.step('Проверяем title главной страницы'):
             assert driver.title == 'cedravium'
+
+        with allure.step('Открываем My profile'):
+            my_profile = driver.find_element(By.XPATH, "//a[@href='#/profile']")
+            my_profile.click()
+            time.sleep(2)
+
+        with allure.step('Ищем логин пользователя на страницы профиля'):
+            assert driver.find_element(By.CSS_SELECTOR, '#app > main > div > section.profile-page__header > h2')
+
+        Button_create_test = driver.find_element(By.CLASS_NAME, 'simple-button').click()
+        time.sleep(2)
+        title_test = driver.find_element(By.CLASS_NAME, 'constructor-page__test-name')
+        title_test.send_keys('Test' + Keys.TAB + Keys.ENTER)
+        My_description = driver.find_element(By.XPATH, '//textarea').send_keys('test 1234567890 !@#$%^&*()_+|?><,')
+        Button_add = driver.find_element(By.XPATH, '//button')
+        Button_add.click()
+        time.sleep(2)
+        Radio_button = driver.find_element(By.XPATH, '//li[1]').click()
+        time.sleep(2)
+        Question = driver.find_element(By.XPATH, "//input[@class='question__title']").send_keys('qwerty1234567890')
+        time.sleep(2)
+
+    def tearDown(self):
+        self.driver.quit()
 
 
 if __name__ == '__test_cedravium__':
