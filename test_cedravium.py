@@ -16,6 +16,7 @@ class CedraviumTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get('http://cedravium.ru/#/')
+        self.driver.maximize_window()
 
     @allure.title('Тестирование авторизации, созадния, открытия тестов')
     @allure.severity(Severity.BLOCKER)
@@ -32,13 +33,15 @@ class CedraviumTest(unittest.TestCase):
             sign_in.send_keys(mail + Keys.TAB + password + Keys.ENTER)
             time.sleep(1)
 
-        with allure.step('Возвращаемся на главную страницу'):
+        with allure.step('Проверяем успешность авторизации и возвращаемся на главную страницу'):
+            time.sleep(2)
+            assert 'All done, buddy' in driver.page_source
             button_go_to_home_page = driver.find_element(By.CLASS_NAME, 'simple-button')
             button_go_to_home_page.click()
             time.sleep(2)
 
-        with allure.step('Проверяем title главной страницы'):
-            assert driver.title == 'cedravium'
+        with allure.step('Проверяем наличие кнопки My profile и title на главной странице'):
+            assert 'My profile' in driver.page_source and 'cedravium' in driver.title
 
         with allure.step('Открываем My profile'):
             my_profile = driver.find_element(By.XPATH, "//a[@href='#/profile']")
