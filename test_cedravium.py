@@ -23,25 +23,22 @@ class CedraviumTest(unittest.TestCase):
     def test_cedravium(self):
         driver = self.driver
         with allure.step('Нажимаем кнопку Sign up'):
-            sign_up = driver.find_element(By.XPATH, "//button[@class='simple-button']")
-            time.sleep(0.5)
+            sign_up = driver.find_element(By.CLASS_NAME, 'simple-button')
             sign_up.click()
 
         sign_in = driver.find_element(By.XPATH, "//form[@class='authentication']//input[@type = 'text']")
         sign_in.click()
         with allure.step('Ожидаем ввода данных пользователя и нажимаем кнопку Enter для авторизации'):
             sign_in.send_keys(mail + Keys.TAB + password + Keys.ENTER)
-            time.sleep(1)
 
         with allure.step('Проверяем успешность авторизации и возвращаемся на главную страницу'):
             time.sleep(2)
-            assert 'All done, buddy' in driver.page_source
+            self.assertIn('All done, buddy', driver.page_source)
             button_go_to_home_page = driver.find_element(By.CLASS_NAME, 'simple-button')
             button_go_to_home_page.click()
-            time.sleep(2)
 
         with allure.step('Проверяем наличие кнопки My profile и title на главной странице'):
-            assert 'My profile' in driver.page_source and 'cedravium' in driver.title
+            self.assertIn('My profile' and 'cedravium', driver.page_source)
 
         with allure.step('Открываем My profile'):
             my_profile = driver.find_element(By.XPATH, "//a[@href='#/profile']")
@@ -49,24 +46,43 @@ class CedraviumTest(unittest.TestCase):
             time.sleep(2)
 
         with allure.step('Ищем логин пользователя на страницы профиля'):
-            assert driver.find_element(By.CSS_SELECTOR, '#app > main > div > section.profile-page__header > h2')
+            self.assertTrue(driver.find_element(By.CSS_SELECTOR, 'h2'))
 
-        Button_create_test = driver.find_element(By.CLASS_NAME, 'simple-button').click()
-        time.sleep(2)
-        title_test = driver.find_element(By.CLASS_NAME, 'constructor-page__test-name')
-        title_test.send_keys('Test' + Keys.TAB + Keys.ENTER)
-        My_description = driver.find_element(By.XPATH, '//textarea').send_keys('test 1234567890 !@#$%^&*()_+|?><,')
-        Button_add = driver.find_element(By.XPATH, '//button')
-        Button_add.click()
-        time.sleep(2)
-        Radio_button = driver.find_element(By.XPATH, '//li[1]').click()
-        time.sleep(2)
-        Question = driver.find_element(By.XPATH, "//input[@class='question__title']").send_keys('qwerty1234567890')
-        time.sleep(2)
+        with allure.step('Нажимаем кнопку создания теста '):
+            Button_create_test = driver.find_element(By.CLASS_NAME, 'simple-button').click()
+            time.sleep(2)
+        with allure.step('Заполняем созданый тест данными'):
+            title_test = driver.find_element(By.CLASS_NAME, 'constructor-page__test-name')
+            title_test.send_keys('Test' + Keys.TAB + Keys.ENTER)
+            My_description = driver.find_element(By.XPATH, '//textarea').send_keys('test 1234567890 !@#$%^&*()_+|?><,')
+            Button_add = driver.find_element(By.XPATH, '//button')
+            Button_add.click()
+            time.sleep(2)
+            Radio_button = driver.find_element(By.XPATH, '//li[1]').click()
+            time.sleep(2)
+            Question = driver.find_element(By.XPATH, "//input[@class='question__title']").send_keys('qwerty1234567890')
+            transparent = driver.find_element(By.CLASS_NAME, 'transparent')
+            while True:
+                transparent.click()
+                time.sleep(2)
+                transparent.click()
+                break
+            time.sleep(2)
+            Option = driver.find_elements(By.XPATH, "//input[@class='question__answer']")
+            for Options in Option:
+                Options.send_keys('abc')
+            time.sleep(2)
+            close = driver.find_element(By.XPATH, '//*[@id="question-0"]/div[2]/div[4]/span')
+            close.click()
+            radio_button = driver.find_element(By.XPATH, "//*[@id='question-0']/div[2]/div[2]/label")
+            radio_button.click()
+            time.sleep(5)
 
-    def tearDown(self):
-        self.driver.quit()
 
 
-if __name__ == '__test_cedravium__':
-    unittest.test_cedravium()
+    # def tearDown(self):
+    #     self.driver.quit()
+
+
+if __name__ == '__main__':
+    unittest.main()

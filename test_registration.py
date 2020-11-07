@@ -1,12 +1,13 @@
 ## Введите данные для регистрации
-login = ''
-email = ''
-password = ''
+login = 'test2'
+email = 'test45@mail.ru'
+password = 'qwerty12'
 ##
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
+
 
 def registration():
     try:
@@ -24,10 +25,13 @@ def registration():
         time.sleep(1)
         button_go_to_home_page = driver.find_element(By.CLASS_NAME, 'simple-button')
         button_go_to_home_page.click()
-        time.sleep(5)
+        time.sleep(2)
+        my_profile = driver.find_element(By.XPATH, "//a[@href='#/profile']")
+        my_profile.click()
 
     finally:
         time.sleep(5)
         driver.quit()
+
 
 registration()
