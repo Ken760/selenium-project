@@ -25,7 +25,7 @@ def regist():
     button_go_to_home_page = driver.find_element(By.CLASS_NAME, 'simple-button')
     button_go_to_home_page.click()
 
-def cont():
+
 
 
 
