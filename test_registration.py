@@ -1,15 +1,10 @@
-## Введите данные для регистрации
-login = 'test2'
-email = 'test45@mail.ru'
-password = 'qwerty12'
-##
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
 
-def registration():
+def registration(login, email, password):
     try:
         driver = webdriver.Chrome()
         driver.get('http://cedravium.ru/#/')
@@ -34,4 +29,4 @@ def registration():
         driver.quit()
 
 
-registration()
+registration('test2', 'test46@mail.ru', 'qwerty12')

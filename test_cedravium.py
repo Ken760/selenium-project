@@ -7,7 +7,7 @@ from selenium import webdriver
 import unittest
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import time
+from time import sleep
 import allure
 from random import choice
 import string
@@ -43,7 +43,7 @@ class CedraviumTest(unittest.TestCase):
         with allure.step(
             "Проверяем успешность авторизации и возвращаемся на главную страницу"
         ):
-            time.sleep(2)
+            sleep(2)
             self.assertIn("All done, buddy", driver.page_source)
             button_go_to_home_page = driver.find_element(By.CLASS_NAME, "simple-button")
             button_go_to_home_page.click()
@@ -56,7 +56,7 @@ class CedraviumTest(unittest.TestCase):
         with allure.step("Открываем My profile"):
             my_profile = driver.find_element(By.XPATH, "//a[@href='#/profile']")
             my_profile.click()
-            time.sleep(2)
+            sleep(2)
 
         with allure.step("Ищем логин пользователя на страницы профиля"):
             self.assertTrue(driver.find_element(By.CSS_SELECTOR, "h2"))
@@ -64,7 +64,7 @@ class CedraviumTest(unittest.TestCase):
         with allure.step("Нажимаем кнопку создания теста "):
             Button_create_test = driver.find_element(By.CLASS_NAME, "simple-button")
             Button_create_test.click()
-            time.sleep(2)
+            sleep(2)
         with allure.step("Заполняем созданый тест данными"):
             title_test = driver.find_element(
                 By.CLASS_NAME, "constructor-page__test-name"
@@ -74,9 +74,9 @@ class CedraviumTest(unittest.TestCase):
             My_description.send_keys(GenRandomLine(500))
             Button_add = driver.find_element(By.XPATH, "//button")
             Button_add.click()
-            time.sleep(2)
+            sleep(2)
             Radio_button = driver.find_element(By.XPATH, "//li[1]").click()
-            time.sleep(2)
+            sleep(2)
             Question = driver.find_element(
                 By.XPATH, "//input[@class='question__title']"
             ).send_keys("qwerty1234567890")
@@ -84,10 +84,10 @@ class CedraviumTest(unittest.TestCase):
             transparent = driver.find_element(By.CLASS_NAME, "transparent")
             while True:
                 transparent.click()
-                time.sleep(2)
+                sleep(2)
                 transparent.click()
                 break
-            time.sleep(2)
+            sleep(2)
 
         with allure.step("Заполнения всех полей Option рандомными значениями"):
             Option = driver.find_elements(
@@ -105,15 +105,28 @@ class CedraviumTest(unittest.TestCase):
                 By.XPATH, "//*[@id='question-0']/div[2]/div[2]/label"
             )
             radio_button.click()
-            time.sleep(2)
+            sleep(2)
 
         with allure.step("Нажимаем create test и возвращаемся на главную страницу"):
             button_create = driver.find_element(By.CLASS_NAME, "create-test")
             button_create.click()
-            time.sleep(2)
+            sleep(2)
             button_go_to_home_page = driver.find_element(By.CLASS_NAME, "simple-button")
             button_go_to_home_page.click()
-            time.sleep(5)
+            sleep(1)
+
+        with allure.step("Возвращаемся в профиль нажимаем Edit и удаляем созданный тест"):
+            Mp = my_profile.click()
+            sleep(1)
+            button_edit = driver.find_element(By.LINK_TEXT, "Edit").click()
+            sleep(1)
+            button_delete = driver.find_element(
+                By.XPATH, "//button[@class='simple-button negative']"
+            ).click()
+            sleep(1)
+            button_go_to_home_page = driver.find_element(By.CLASS_NAME, "simple-button")
+            button_go_to_home_page.click()
+            sleep(1)
 
     def tearDown(self):
         self.driver.quit()
