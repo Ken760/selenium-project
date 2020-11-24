@@ -75,7 +75,8 @@ class CedraviumTest(unittest.TestCase):
             Button_add = driver.find_element(By.XPATH, "//button")
             Button_add.click()
             sleep(2)
-            Radio_button = driver.find_element(By.XPATH, "//li[1]").click()
+            Radio_button = driver.find_element(By.XPATH, "//li[1]")
+            Radio_button.click()
             sleep(2)
             Question = driver.find_element(
                 By.XPATH, "//input[@class='question__title']"
@@ -118,11 +119,13 @@ class CedraviumTest(unittest.TestCase):
         with allure.step("Возвращаемся в профиль нажимаем Edit и удаляем созданный тест"):
             Mp = my_profile.click()
             sleep(1)
-            button_edit = driver.find_element(By.LINK_TEXT, "Edit").click()
+            button_edit = driver.find_element(By.LINK_TEXT, "Edit")
+            button_edit.click()
             sleep(1)
             button_delete = driver.find_element(
                 By.XPATH, "//button[@class='simple-button negative']"
-            ).click()
+            )
+            button_delete.click()
             sleep(1)
             button_go_to_home_page = driver.find_element(By.CLASS_NAME, "simple-button")
             button_go_to_home_page.click()
