@@ -119,9 +119,11 @@ class CedraviumTest(unittest.TestCase):
         with allure.step("Возвращаемся в профиль нажимаем Edit и удаляем созданный тест"):
             Mp = my_profile.click()
             sleep(1)
+            self.assertTrue(driver.find_element(By.CLASS_NAME, 'home-page__tests-list__test'))
             button_edit = driver.find_element(By.LINK_TEXT, "Edit")
             button_edit.click()
             sleep(1)
+            self.assertIn('Delete test', driver.page_source)
             button_delete = driver.find_element(
                 By.XPATH, "//button[@class='simple-button negative']"
             )
