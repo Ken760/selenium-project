@@ -19,7 +19,8 @@ def GenRandomLine(length=5, chars=string.ascii_lowercase + string.digits):
 
 class CedraviumTest(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        path = r'C:\Users\Ken\PycharmProjects\selenium-project\chromedriver.exe'
+        self.driver = webdriver.Chrome(executable_path=path)
         self.driver.get("http://cedravium.ru/#/")
         self.driver.maximize_window()
 

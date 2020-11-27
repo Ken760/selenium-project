@@ -6,7 +6,8 @@ import time
 
 def registration(login, email, password):
     try:
-        driver = webdriver.Chrome()
+        path = r'C:\Users\Ken\PycharmProjects\selenium-project\chromedriver.exe'
+        driver = webdriver.Chrome(executable_path=path)
         driver.get('http://cedravium.ru/#/')
         sign_up = driver.find_element(By.XPATH, "//button[@class='simple-button']")
         sign_up.click()
