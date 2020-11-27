@@ -19,7 +19,7 @@ def test_create_test(browser):
 
 
 def go_to_login_page(browser, mail, password):
-    login_link = browser.find_element(By.XPATH, "//a[@href='#/auth']")
+    login_link = browser.find_element(By.CLASS_NAME, "simple-button")
     login_link.click()
     sign_in = browser.find_element(
         By.XPATH, "//form[@class='authentication']//input[@type = 'text']"
