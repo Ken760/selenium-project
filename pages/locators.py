@@ -17,3 +17,14 @@ class LoginPageLocators():
     EMAIL_INPUT_SIGN_UP = (By.CSS_SELECTOR, "form.registration > div:nth-child(3) ")
     BUTTON_ENTER = (By.XPATH, "//form[@class='authentication']//button[@type = 'submit']")
     BUTTON_REGISTER = (By.XPATH, "//form[@class='registration']//button[@type = 'submit']")
+
+
+class CreateTest():
+    BUTTON_CREATE_TEST = (By.CLASS_NAME, "simple-button")
+    TITLE_TEST = (By.CLASS_NAME, "constructor-page__test-name")
+    BUTTON_ADD_DESCRIPTION = (By.XPATH, "//div[@class='constructor-page__main-panel']//button[@class='simple-button']")
+    INPUT_MY_DESCRIPTION = (By.XPATH, "//textarea")
+    BUTTON_ADD_TEST = (By.CLASS_NAME, "simple-button circle")
+    TEST_ONE_OF_THE_LIST = (By.XPATH, "//li[@data_question_type='RADIO_BUTTON']")
+    TEST_SEVERAL_OF_THE_LIST = (By.XPATH, "//li[@data_question_type='CHECK_BOX']")
+    TEST_TEXT_INPUT = (By.XPATH, "//li[@data_question_type='INPUT_FIELD']")

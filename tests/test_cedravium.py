@@ -21,6 +21,7 @@ class CedraviumTest(unittest.TestCase):
     def setUp(self):
         path = r'C:\Users\Ken\PycharmProjects\selenium-project\chromedriver.exe'
         self.driver = webdriver.Chrome(executable_path=path)
+
         self.driver.get("http://cedravium.ru/#/")
         self.driver.maximize_window()
 
@@ -76,7 +77,7 @@ class CedraviumTest(unittest.TestCase):
             Button_add = driver.find_element(By.XPATH, "//button")
             Button_add.click()
             sleep(2)
-            Radio_button = driver.find_element(By.XPATH, "//li[1]")
+            Radio_button = driver.find_element(By.XPATH, "//li[@data_question_type='RADIO_BUTTON']")
             Radio_button.click()
             sleep(2)
             Question = driver.find_element(
