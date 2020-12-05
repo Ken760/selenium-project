@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators():
     SIGN_UP_LINK = (By.XPATH, "//a[@href='#/auth']")
-    HOME_PAGE = (By.CLASS_NAME, "simple-button")
+    HOME_PAGE = (By.XPATH, "//div[@class='auth-page']//button[text()='Go to home page']")
     MY_PROFILE = (By.XPATH, "//a[@href='#/profile']")
 
 

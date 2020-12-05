@@ -11,6 +11,7 @@ class LoginPage(BasePage):
         self.should_be_login_url()
         self.should_be_login_form()
         self.should_be_register_form()
+        self.user_authorization()
 
     def should_be_login_url(self):
         assert self.is_element_present(*LoginPageLocators.SIGN_UP), "sign up is not presented"
@@ -40,7 +41,6 @@ class LoginPage(BasePage):
         confirm_password_field.send_keys(password)
         button_register = self.browser.find_element(*LoginPageLocators.BUTTON_REGISTER)
         button_register.click()
-        time.sleep(1)
 
     def go_to_home_page(self):
         assert self.is_element_present(*BasePageLocators.HOME_PAGE), \
@@ -48,10 +48,13 @@ class LoginPage(BasePage):
         button_go_to_home_page = self.browser.find_element(*BasePageLocators.HOME_PAGE)
         button_go_to_home_page.click()
 
-    def should_be_my_profile(self):
-        assert self.is_element_present(*BasePageLocators.MY_PROFILE), \
-            "My Profile is not presented"
-
+    def user_authorization(self, email="test@mail.ru", password="qwerty11"):
+        authorization_email = self.browser.find_element(*LoginPageLocators.EMAIL_INPUT_SIGN_IN)
+        authorization_email.send_keys(email)
+        authorization_password = self.browser.find_element(*LoginPageLocators.PASSWORD_INPUT_SIGN_IN)
+        authorization_password.send_keys(password)
+        button_enter = self.browser.find_element(*LoginPageLocators.BUTTON_ENTER)
+        button_enter.click()
 
 
 
