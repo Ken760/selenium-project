@@ -2,8 +2,9 @@ from selenium.webdriver.common.by import By
 from .base_page import BasePage
 from .locators import LoginPageLocators
 from .locators import BasePageLocators
+from .locators import CreateTestLocators
 import random
-import time
+from time import sleep
 
 
 class LoginPage(BasePage):
@@ -12,6 +13,16 @@ class LoginPage(BasePage):
         self.should_be_login_form()
         self.should_be_register_form()
         self.user_authorization()
+
+    def go_to_profile_page(self):
+        self.should_be_login_url()
+        self.should_be_login_form()
+        self.should_be_register_form()
+        self.user_authorization()
+        self.go_to_home_page()
+        self.should_be_authorized_user()
+        self.go_to_profile()
+        sleep(2)
 
     def should_be_login_url(self):
         assert self.is_element_present(*LoginPageLocators.SIGN_UP), "sign up is not presented"
@@ -47,6 +58,10 @@ class LoginPage(BasePage):
             "Button form is not presented"
         button_go_to_home_page = self.browser.find_element(*BasePageLocators.HOME_PAGE)
         button_go_to_home_page.click()
+
+    def go_to_profile(self):
+        my_profile = self.browser.find_element(*BasePageLocators.MY_PROFILE)
+        my_profile.click()
 
     def user_authorization(self, email="test@mail.ru", password="qwerty11"):
         authorization_email = self.browser.find_element(*LoginPageLocators.EMAIL_INPUT_SIGN_IN)
