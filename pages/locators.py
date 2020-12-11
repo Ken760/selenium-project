@@ -30,3 +30,6 @@ class CreateTestLocators:
     TEST_ONE_OF_THE_LIST = (By.XPATH, "//li[@data_question_type='RADIO_BUTTON']")
     TEST_SEVERAL_OF_THE_LIST = (By.XPATH, "//li[@data_question_type='CHECK_BOX']")
     TEST_TEXT_INPUT = (By.XPATH, "//li[@data_question_type='INPUT_FIELD']")
+    QUESTION_FIELD1 = (By.CSS_SELECTOR, "#question-0 > div.question__header > input")
+    QUESTION_FIELD2 = (By.CSS_SELECTOR, "#question-1 > div.question__header > input")
+    QUESTION_FIELD3 = (By.CSS_SELECTOR, "#question-2 > div.question__header > input")

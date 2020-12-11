@@ -37,28 +37,28 @@ class TestAuthorization:
         self.login_page.should_be_login_page()
         self.login_page.go_to_home_page()
 
-    # @pytest.mark.xfail(reason="incorrect email")
-    # def test_incorrect_email_sign_in_user(self, browser):
-    #     link = "http://cedravium.ru/#/"
-    #     self.login_page = LoginPage(browser, link)
-    #     self.login_page.open()
-    #     self.login_page.should_be_login_url()
-    #     fake = faker.Faker()
-    #     email = fake.email()
-    #     self.login_page.user_authorization(email)
-    #     self.login_page.go_to_home_page()
-    #
-    # @pytest.mark.xfail(reason="incorrect password")
-    # def test_incorrect_password_sign_in_user(self, browser):
-    #     link = "http://cedravium.ru/#/"
-    #     self.login_page = LoginPage(browser, link)
-    #     self.login_page.open()
-    #     self.login_page.should_be_login_url()
-    #     fake = faker.Faker()
-    #     password = fake.password()
-    #     email = 'test@mail.ru'
-    #     self.login_page.user_authorization(email, password)
-    #     self.login_page.go_to_home_page()
+    @pytest.mark.xfail(reason="incorrect email")
+    def test_incorrect_email_sign_in_user(self, browser):
+        link = "http://cedravium.ru/#/"
+        self.login_page = LoginPage(browser, link)
+        self.login_page.open()
+        self.login_page.should_be_login_url()
+        fake = faker.Faker()
+        email = fake.email()
+        self.login_page.user_authorization(email)
+        self.login_page.go_to_home_page()
+
+    @pytest.mark.xfail(reason="incorrect password")
+    def test_incorrect_password_sign_in_user(self, browser):
+        link = "http://cedravium.ru/#/"
+        self.login_page = LoginPage(browser, link)
+        self.login_page.open()
+        self.login_page.should_be_login_url()
+        fake = faker.Faker()
+        password = fake.password()
+        email = 'test@mail.ru'
+        self.login_page.user_authorization(email, password)
+        self.login_page.go_to_home_page()
 
 
 

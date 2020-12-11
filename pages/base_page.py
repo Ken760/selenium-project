@@ -3,7 +3,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import BasePageLocators
-
+import random
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):
@@ -18,6 +18,12 @@ class BasePage():
         assert self.is_element_present(*BasePageLocators.SIGN_UP_LINK), "sign up is not presented"
         link = self.browser.find_element(*BasePageLocators.SIGN_UP_LINK)
         link.click()
+
+    def random_text_generator(self, length):
+        text = list('abcdefghijklmnopqrstuvwxyz1234567890')
+        random.shuffle(text)
+        password = ''.join([random.choice(text) for x in range(length)])
+        return password
 
     def should_be_authorized_user(self):
         assert self.is_element_present(*BasePageLocators.MY_PROFILE), "Profile icon is not presented," \
