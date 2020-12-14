@@ -5,6 +5,7 @@ class BasePageLocators:
     SIGN_UP_LINK = (By.XPATH, "//a[@href='#/auth']")
     HOME_PAGE = (By.XPATH, "//div[@class='auth-page']//button[text()='Go to home page']")
     MY_PROFILE = (By.XPATH, "//a[@href='#/profile']")
+    LOG_OUT = (By.CLASS_NAME, "neutral")
 
 
 class LoginPageLocators:
@@ -26,10 +27,14 @@ class CreateTestLocators:
     TITLE_TEST = (By.CLASS_NAME, "constructor-page__test-name")
     BUTTON_ADD_DESCRIPTION = (By.XPATH, "//div[@class='constructor-page__main-panel']//button[@class='simple-button']")
     INPUT_MY_DESCRIPTION = (By.XPATH, "//textarea")
-    BUTTON_ADD_TEST = (By.CLASS_NAME, "simple-button circle")
+    BUTTON_ADD_TEST = (By.XPATH, "//button[@class='simple-button circle']")
     TEST_ONE_OF_THE_LIST = (By.XPATH, "//li[@data_question_type='RADIO_BUTTON']")
     TEST_SEVERAL_OF_THE_LIST = (By.XPATH, "//li[@data_question_type='CHECK_BOX']")
     TEST_TEXT_INPUT = (By.XPATH, "//li[@data_question_type='INPUT_FIELD']")
+    TEST_FORM = (By.ID, "question-0")
+    QUESTION_NAME = (By.CLASS_NAME, "question__title")
     QUESTION_FIELD1 = (By.CSS_SELECTOR, "#question-0 > div.question__header > input")
     QUESTION_FIELD2 = (By.CSS_SELECTOR, "#question-1 > div.question__header > input")
     QUESTION_FIELD3 = (By.CSS_SELECTOR, "#question-2 > div.question__header > input")
+    ANSWERS_FIELD1 = (By.CSS_SELECTOR, "#question-0 > div.question__answers-list > div:nth-child(1) > input")
+    ANSWERS_FIELD2 = (By.CSS_SELECTOR, "#question-0 > div.question__answers-list > div:nth-child(2) > input")

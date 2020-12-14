@@ -1,8 +1,7 @@
-from selenium.webdriver.common.by import By
 from .base_page import BasePage
 from .locators import LoginPageLocators
 from .locators import BasePageLocators
-from .locators import CreateTestLocators
+
 import random
 from time import sleep
 
@@ -59,9 +58,17 @@ class LoginPage(BasePage):
         button_go_to_home_page = self.browser.find_element(*BasePageLocators.HOME_PAGE)
         button_go_to_home_page.click()
 
+    def failed_authorization(self):
+        assert self.is_not_element_present(*BasePageLocators.HOME_PAGE)
+
     def go_to_profile(self):
         my_profile = self.browser.find_element(*BasePageLocators.MY_PROFILE)
         my_profile.click()
+
+    def log_out(self):
+        logout = self.browser.find_element(*BasePageLocators.LOG_OUT)
+        logout.click()
+        assert self.is_element_present(*BasePageLocators.SIGN_UP_LINK)
 
     def user_authorization(self, email="test@mail.ru", password="qwerty11"):
         authorization_email = self.browser.find_element(*LoginPageLocators.EMAIL_INPUT_SIGN_IN)

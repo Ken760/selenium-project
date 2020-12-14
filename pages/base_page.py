@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from pages.locators import BasePageLocators
 import random
 
+
 class BasePage():
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
