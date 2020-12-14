@@ -44,7 +44,6 @@ class TestAuthorization:
         self.login_page.go_to_home_page()
         self.login_page.go_to_profile()
         self.login_page.log_out()
-        time.sleep(5)
 
     def test_incorrect_email_sign_in_user(self, browser):
         link = "http://cedravium.ru/#/"

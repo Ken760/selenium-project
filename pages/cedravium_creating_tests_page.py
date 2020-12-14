@@ -46,10 +46,24 @@ class CreateTestsPage(BasePage):
         text_question = self.random_text_generator(length)
         question.send_keys(text_question)
 
-    def filling_answers(self, first, second):
+    def filling_responses_separately(self, first, second):
         first_answers = self.browser.find_element(*CreateTestLocators.ANSWERS_FIELD1)
         text1 = self.random_text_generator(first)
         text2 = self.random_text_generator(second)
         first_answers.send_keys(text1)
         second_answers = self.browser.find_element(*CreateTestLocators.ANSWERS_FIELD2)
         second_answers.send_keys(text2)
+
+    def filling_answers_all_random(self, length):
+        answer = self.browser.find_elements(*CreateTestLocators.ANSWERS_FIELD)
+        for answers in answer:
+            answers.send_keys(self.random_text_generator(length))
+
+    def response_selecting(self):
+        response = self.browser.find_elements(*CreateTestLocators.RESPONSE_SELECTING)
+        for responses in response:
+            responses.click()
+
+    def create_test(self):
+        create = self.browser.find_element(*CreateTestLocators.CREATE_TEST)
+        create.click()
