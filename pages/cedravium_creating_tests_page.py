@@ -1,8 +1,6 @@
 from .base_page import BasePage
-# from .cedravium_page import LoginPage
-# from .locators import LoginPageLocators
-# from .locators import BasePageLocators
 from .locators import CreateTestLocators
+from .locators import EditTestLocators
 from time import sleep
 import random
 
@@ -68,3 +66,11 @@ class CreateTestsPage(BasePage):
     def create_test(self):
         create = self.browser.find_element(*CreateTestLocators.CREATE_TEST)
         create.click()
+
+    def edit_test(self):
+        edit_test = self.browser.find_element(*EditTestLocators.EDIT_TEST)
+        edit_test.click()
+
+    def delete_test(self):
+        delete_test = self.browser.find_element(*EditTestLocators.DELETE_TEST)
+        delete_test.click()

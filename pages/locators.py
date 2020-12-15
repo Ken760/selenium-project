@@ -39,6 +39,11 @@ class CreateTestLocators:
     ANSWERS_FIELD = (By.XPATH, "//input[@class='question__answer']")
     ANSWERS_FIELD1 = (By.CSS_SELECTOR, "#question-0 > div.question__answers-list > div:nth-child(1) > input")
     ANSWERS_FIELD2 = (By.CSS_SELECTOR, "#question-0 > div.question__answers-list > div:nth-child(2) > input")
-    CREATE_TEST = (By.CLASS_NAME, "simple-button create-test")
-    DELETE_TEST = (By.CLASS_NAME, "simple-button negative")
+    CREATE_TEST = (By.CLASS_NAME, "create-test")
     RESPONSE_SELECTING = (By.XPATH, "//label[@class='pure-material-radio']")
+
+
+class EditTestLocators:
+    EDIT_TEST = (By.XPATH, "//button[text()='Edit']")
+    DELETE_TEST = (By.CLASS_NAME, "negative")
+    SAVE_CHANGES = (By.CLASS_NAME, "create-test")
