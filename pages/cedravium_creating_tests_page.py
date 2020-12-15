@@ -4,7 +4,7 @@ from .base_page import BasePage
 # from .locators import BasePageLocators
 from .locators import CreateTestLocators
 from time import sleep
-
+import random
 
 class CreateTestsPage(BasePage):
     def button_create_tests(self):
@@ -61,8 +61,9 @@ class CreateTestsPage(BasePage):
 
     def response_selecting(self):
         response = self.browser.find_elements(*CreateTestLocators.RESPONSE_SELECTING)
-        for responses in response:
-            responses.click()
+        response_option = random.choice(response)   # Случайный выбор варианта ответа
+        # response_option = response[0] # Свой выбор варианта ответа
+        response_option.click()
 
     def create_test(self):
         create = self.browser.find_element(*CreateTestLocators.CREATE_TEST)
