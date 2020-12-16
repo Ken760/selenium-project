@@ -1,6 +1,5 @@
 from pages.cedravium_page import LoginPage
 from pages.cedravium_creating_tests_page import CreateTestsPage
-import time
 
 
 class TestCreateTests:
@@ -12,6 +11,9 @@ class TestCreateTests:
         self.page.go_to_profile_page()
         self.create.button_create_tests()
 
+    '''
+    Пример с заполнение всех полей случайнымы значениями
+    '''
     def test_filling_in_the_test_with_random_data(self, browser):
         self.test_creating_a_test_from_a_profile(browser)
         self.create = CreateTestsPage(browser, '')
@@ -22,6 +24,9 @@ class TestCreateTests:
         self.create.filling_answers_all_random(length=20)
         self.create.response_selecting()
         self.create.create_test()
+
+    def test_filling_test_with__data(self, browser):
+        pass
 
     def test_delete_test(self, browser):
         link = "http://cedravium.ru/#/"
